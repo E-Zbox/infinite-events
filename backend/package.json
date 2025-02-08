@@ -1,0 +1,58 @@
+{
+  "name": "backend-service",
+  "version": "1.0.0",
+  "description": "Backend service for Infinity Events an Event Management Platform",
+  "main": "dest/index.js",
+  "scripts": {
+    "build": "tsc && tsc-alias && npm run copy-files",
+    "copy-files": "cp -r ./src/templates ./dist/",
+    "dev": "nodemon --trace-warnings",
+    "start": "node ./dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "\"event",
+    "management",
+    "platform\"",
+    "\"event",
+    "management\"",
+    "event"
+  ],
+  "author": "\"Ononogbu Ebenezer\"",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.41.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "graphql": "^16.10.0",
+    "graphql-http": "^1.22.3",
+    "graphql-scalars": "^1.24.0",
+    "handlebars": "^4.7.8",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.4",
+    "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0",
+    "otp-generator": "^4.0.1",
+    "reflect-metadata": "^0.2.2",
+    "socket.io": "^4.8.1",
+    "type-graphql": "^2.0.0-rc.2"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/mongoose": "^5.11.97",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.10.5",
+    "@types/nodemailer": "^6.4.17",
+    "@types/otp-generator": "^4.0.2",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.10",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.3"
+  }
+}
