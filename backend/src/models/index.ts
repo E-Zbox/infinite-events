@@ -1,0 +1,5 @@
+export const EVENT_TYPE_HYBRID = "HYBRID";
+export const EVENT_TYPE_PHYSICAL = "PHYSICAL";
+export const EVENT_TYPE_VIRTUAL = "VIRTUAL";
+
+export const MEDIA_PARENT_EVENT = "EVENT";
