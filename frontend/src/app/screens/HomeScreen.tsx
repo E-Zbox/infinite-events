@@ -106,8 +106,8 @@ const HomeScreen = () => {
     });
 
     socket.on(connection_success, (payload: IGenericResponse<string>) => {
-      // console.log("connected to namespace");
-      // console.log(payload);
+      console.log("connected to namespace");
+      console.log(payload);
     });
 
     socket.on(
