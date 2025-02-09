@@ -113,50 +113,46 @@ const AboutEvent = () => {
   useEffect(() => {
     const { socket } = userState;
 
-    if (socket) {
-      socket.on(
-        join_event_rooms_success,
-        (payload: IGenericResponse<IEventRoom>) => {
-          // console.log(payload);
-        }
-      );
+    socket.on(
+      join_event_rooms_success,
+      (payload: IGenericResponse<IEventRoom>) => {
+        // console.log(payload);
+      }
+    );
 
-      socket.emit(join_event_rooms);
+    socket.emit(join_event_rooms);
 
-      socket.on(
-        event_room_success,
-        (payload: IGenericResponse<IEventRoomAttendeeNotification>) => {
-          const { data, error, success } = payload;
-          console.log(event_room_success);
-          console.log(payload);
+    socket.on(
+      event_room_success,
+      (payload: IGenericResponse<IEventRoomAttendeeNotification>) => {
+        const { data, error, success } = payload;
 
-          if (success) {
-            if (data.eventId === _id) {
-              setTotalAttendeesState(data.totalAttendees);
+        if (success) {
+          if (data.eventId === _id) {
+            setTotalAttendeesState(data.totalAttendees);
 
-              getEventById(token, String(_id))
-                .then((res) => {
-                  const { data, error, success } = res;
+            getEventById(token, String(_id))
+              .then((res) => {
+                const { data, error, success } = res;
 
-                  setLoadingState(false);
+                setLoadingState(false);
 
-                  if (!success) {
-                    window.alert(error);
-                    return;
-                  }
+                if (!success) {
+                  window.alert(error);
+                  return;
+                }
 
-                  setEventState(data);
-                })
-                .catch((err) => {
-                  // console.log(err);
+                setEventState(data);
+              })
+              .catch((err) => {
+                // console.log(err);
 
-                  setLoadingState(false);
-                });
-            }
+                setLoadingState(false);
+              });
           }
         }
-      );
-    }
+      }
+    );
   }, [userState]);
 
   return (
