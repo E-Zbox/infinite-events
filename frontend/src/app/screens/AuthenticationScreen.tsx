@@ -1,5 +1,6 @@
 "use client";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { io } from "socket.io-client";
 // api
 import { checkUsername, signInUser, signUpUser } from "@/api/rest/auth";
 // store
@@ -24,6 +25,8 @@ import { DivContainer } from "../styles/shared/Container.styles";
 import { StatusImage } from "../styles/shared/Image.styles";
 // utils
 import { screens } from "../utils/data";
+
+const SOCKET_URL = process.env.NEXT_PUBLIC_SERVER_BASE_URL;
 
 interface IUsernameExists {
   exists: null | boolean;
@@ -96,7 +99,16 @@ const AuthenticationScreen = () => {
 
       const { token, username } = data;
 
-      setUserState({ signedIn: true, token, username });
+      const socket = io(`${SOCKET_URL}/socket/user`, {
+        extraHeaders: {
+          Authorization: `Bearer ${token}`,
+        },
+        query: {
+          // namespace: "/socket/user",
+        },
+      });
+
+      setUserState({ signedIn: true, socket, token, username });
     } else {
       setFormState((prevState) => ({ ...prevState, loading: true }));
 

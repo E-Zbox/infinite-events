@@ -1,6 +1,8 @@
-import { Socket } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import { create } from "zustand";
 import { ICategory as Category, IEvent } from "@/api/graphql/interface";
+
+const SOCKET_URL = process.env.NEXT_PUBLIC_SERVER_BASE_URL;
 
 interface ICategory extends Category {
   selected: boolean;
@@ -16,6 +18,7 @@ export interface IEventState {
 
 interface IUserState {
   signedIn: boolean;
+  socket: Socket;
   token: string;
   username: string;
 }
@@ -28,8 +31,6 @@ interface IStore {
   setSelectedCategoryIdState: (newState: string) => void;
   eventState: IEventState;
   setEventState: (newState: IEventState) => void;
-  socketState: null | Socket;
-  setSocketState: (newState: Socket) => void;
   userState: IUserState;
   setUserState: (newState: IUserState) => void;
 }
@@ -65,10 +66,13 @@ export const useDefaultStore = create<IStore>((set) => ({
       ...prevState,
       eventState: { ...prevState.eventState, ...newState },
     })),
-  socketState: null,
-  setSocketState: (newState: Socket) => set({ socketState: newState }),
   userState: {
     signedIn: false,
+    socket: io(`${SOCKET_URL}/socket/user`, {
+      query: {
+        // namespace: "/socket/user",
+      },
+    }),
     token: "",
     username: "",
   },

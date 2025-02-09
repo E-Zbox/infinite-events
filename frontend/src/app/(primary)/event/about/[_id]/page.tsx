@@ -39,8 +39,7 @@ const AboutEvent = () => {
   const { event_room_error, event_room_success, join_event_rooms_success } =
     emitEvents;
   const { join_event_rooms } = onEvents;
-  const { setSelectedCategoryIdState, socketState, userState } =
-    useDefaultStore();
+  const { setSelectedCategoryIdState, userState } = useDefaultStore();
   const {
     default: {
       assets: { loaderLogo },
@@ -112,22 +111,23 @@ const AboutEvent = () => {
   }, [eventState]);
 
   useEffect(() => {
-    if (socketState) {
-      socketState.on(
+    const { socket } = userState;
+
+    if (socket) {
+      socket.on(
         join_event_rooms_success,
         (payload: IGenericResponse<IEventRoom>) => {
-          console.log(payload);
+          // console.log(payload);
         }
       );
 
-      socketState.emit(join_event_rooms);
+      socket.emit(join_event_rooms);
 
-      socketState.on(
+      socket.on(
         event_room_success,
         (payload: IGenericResponse<IEventRoomAttendeeNotification>) => {
           const { data, error, success } = payload;
 
-          console.log(payload);
           if (success) {
             if (data.eventId === _id) {
               setTotalAttendeesState(data.totalAttendees);
@@ -155,7 +155,7 @@ const AboutEvent = () => {
         }
       );
     }
-  }, [socketState]);
+  }, [userState]);
 
   return (
     <MainAboutEvent>

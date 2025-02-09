@@ -1,4 +1,5 @@
 export const emitEvents = {
+  connect: "connect",
   connection_success: "connection_success",
   event_room_error: "event_room_error",
   event_room_success: "event_room_success",
@@ -6,7 +7,6 @@ export const emitEvents = {
 };
 
 export const onEvents = {
-  connection: "connection",
   disconnect: "disconnect",
   join_event_rooms: "join_event_rooms",
 };

@@ -51,8 +51,6 @@ const HomeScreen = () => {
     eventState,
     setEventState,
     setSelectedCategoryIdState,
-    socketState,
-    setSocketState,
     userState,
   } = useDefaultStore();
 
@@ -75,7 +73,7 @@ const HomeScreen = () => {
 
   const [loadingState, setLoadingState] = useState(false);
 
-  const { token, username } = userState;
+  const { socket, token, username } = userState;
 
   const categoriesIds = Object.getOwnPropertyNames(categoryState);
 
@@ -95,6 +93,7 @@ const HomeScreen = () => {
   };
 
   const {
+    connect,
     connection_success,
     event_room_error,
     event_room_success,
@@ -102,32 +101,21 @@ const HomeScreen = () => {
   } = emitEvents;
 
   useEffect(() => {
-    const socket = io(SOCKET_URL, {
-      extraHeaders: {
-        Authorization: `Bearer ${token}`,
-      },
-      query: {
-        namespace: "/socket/user",
-      },
-    });
-
-    socket.on("connected", () => {
-      console.log("connected here");
+    socket.on(connect, () => {
+      console.log("socket 🔌");
     });
 
     socket.on(connection_success, (payload: IGenericResponse<string>) => {
-      console.log("connected to namespace");
-      console.log(payload);
+      // console.log("connected to namespace");
+      // console.log(payload);
     });
 
     socket.on(
       join_event_rooms_success,
       (payload: IGenericResponse<IEventRoom>) => {
-        console.log(payload);
+        // console.log(payload);
       }
     );
-
-    setSocketState(socket);
 
     setLoadingState(true);
 
@@ -188,25 +176,6 @@ const HomeScreen = () => {
         });
     }
   }, [selectedCategoryIdState]);
-
-  useEffect(() => {
-    if (socketState) {
-      socketState.on(
-        connection_success,
-        (payload: IGenericResponse<string>) => {
-          console.log("connected to namespace");
-          console.log(payload);
-        }
-      );
-
-      socketState.on(
-        join_event_rooms_success,
-        (payload: IGenericResponse<IEventRoom>) => {
-          console.log(payload);
-        }
-      );
-    }
-  }, [socketState]);
 
   useEffect(() => {
     const selectedFilter = timelineFilterState.find(
