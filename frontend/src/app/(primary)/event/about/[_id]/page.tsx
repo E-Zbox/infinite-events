@@ -127,6 +127,8 @@ const AboutEvent = () => {
         event_room_success,
         (payload: IGenericResponse<IEventRoomAttendeeNotification>) => {
           const { data, error, success } = payload;
+          console.log(event_room_success);
+          console.log(payload);
 
           if (success) {
             if (data.eventId === _id) {
