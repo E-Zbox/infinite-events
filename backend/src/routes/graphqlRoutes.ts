@@ -17,6 +17,15 @@ adminGraphqlRoutes.use([verifyAdminToken]);
 
 adminGraphqlRoutes.all("/", adminGraphqlHandler);
 
+const guestUserGraphqlHandler = createHandler({
+  context: {},
+  schema,
+});
+
+export const guestUserGraphqlRoutes = Router();
+
+guestUserGraphqlRoutes.all("/", guestUserGraphqlHandler);
+
 const userGraphqlHandler = createHandler({
   context: userContext,
   schema,

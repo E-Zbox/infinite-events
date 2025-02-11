@@ -9,7 +9,11 @@ import { globalErrorController, invalidRoutesController } from "./controllers";
 import { baseAPIURL, baseGraphURL, indexRoutes } from "./routes";
 import { adminAuthRoutes } from "./routes/adminRoutes";
 import eventRoutes from "./routes/eventRoutes";
-import { adminGraphqlRoutes, userGraphqlRoutes } from "./routes/graphqlRoutes";
+import {
+  adminGraphqlRoutes,
+  guestUserGraphqlRoutes,
+  userGraphqlRoutes,
+} from "./routes/graphqlRoutes";
 import { userAuthRoutes, userRoutes } from "./routes/userRoutes";
 
 const { PORT } = process.env;
@@ -22,6 +26,7 @@ app.use(`${baseAPIURL}/auth/user`, userAuthRoutes);
 app.use(`${baseAPIURL}/user`, userRoutes);
 // graph api
 app.use(`${baseGraphURL}/admin`, adminGraphqlRoutes);
+app.use(`${baseGraphURL}/guest/user`, guestUserGraphqlRoutes);
 app.use(`${baseGraphURL}/user`, userGraphqlRoutes);
 
 app.use("*", invalidRoutesController);
