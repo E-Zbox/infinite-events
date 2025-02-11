@@ -271,7 +271,7 @@ const HomeScreen = () => {
         <MainEvents>
           <EventsContainer>
             {categoriesIds.length > 0 ? (
-              <AddEventButton onClick={() => handleAddEventButtonClick}>
+              <AddEventButton onClick={handleAddEventButtonClick}>
                 <p>Create Event</p>
               </AddEventButton>
             ) : (
