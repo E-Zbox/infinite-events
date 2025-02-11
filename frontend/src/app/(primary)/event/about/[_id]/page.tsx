@@ -60,7 +60,7 @@ const AboutEvent = () => {
   const handleRSVPEvent = async () => {
     setLoadingState(true);
 
-    const { data, error, success } = await registerForEvent(token, String(_id));
+    const { error, success } = await registerForEvent(token, String(_id));
 
     setLoadingState(false);
 
