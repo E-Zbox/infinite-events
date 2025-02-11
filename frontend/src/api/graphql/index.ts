@@ -8,12 +8,16 @@ import {
 
 const SERVER_GRAPHQL_URL = process.env.NEXT_PUBLIC_SERVER_GRAPHQL_URL;
 
+const SERVER_GUEST_GRAPHQL_URL =
+  process.env.NEXT_PUBLIC_SERVER_GUEST_GRAPHQL_URL;
+
 export const getCategories = async (
-  token: string
+  token: string,
+  asGuest: boolean
 ): Promise<ICategoriesResponse> => {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    uri: SERVER_GRAPHQL_URL,
+    uri: asGuest ? SERVER_GUEST_GRAPHQL_URL : SERVER_GRAPHQL_URL,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -70,11 +74,12 @@ export const getCategories = async (
 
 export const getEventsByCategoryId = async (
   token: string,
-  categoryId: string
+  categoryId: string,
+  asGuest: boolean
 ): Promise<IEventsResponse> => {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    uri: SERVER_GRAPHQL_URL,
+    uri: asGuest ? SERVER_GUEST_GRAPHQL_URL : SERVER_GRAPHQL_URL,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -114,7 +119,6 @@ export const getEventsByCategoryId = async (
               endDate
               name
               price
-              registered
              }
              error
              success
@@ -139,11 +143,12 @@ export const getEventsByCategoryId = async (
 export const getEventsByCategoryIdAndTimeline = async (
   token: string,
   categoryId: string,
-  timeline: string
+  timeline: string,
+  asGuest: boolean
 ): Promise<IEventsResponse> => {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    uri: SERVER_GRAPHQL_URL,
+    uri: asGuest ? SERVER_GUEST_GRAPHQL_URL : SERVER_GRAPHQL_URL,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -184,7 +189,6 @@ export const getEventsByCategoryIdAndTimeline = async (
               endDate
               name
               price
-              registered
              }
              error
              success
