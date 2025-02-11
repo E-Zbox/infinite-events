@@ -55,7 +55,7 @@ const AboutEvent = () => {
   const [loadingState, setLoadingState] = useState(false);
   const [totalAttendeesState, setTotalAttendeesState] = useState(0);
 
-  const { token, username } = userState;
+  const { token } = userState;
 
   const handleRSVPEvent = async () => {
     setLoadingState(true);
