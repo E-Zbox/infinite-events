@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface IMainHomeScreen {
+  $marginTop?: string;
+}
+
 interface ISelected {
   $selected: boolean;
 }
@@ -8,14 +12,15 @@ interface IEventCard {
   $bgImg: string;
 }
 
-export const MainHomeScreen = styled.main`
+export const MainHomeScreen = styled.main<IMainHomeScreen>`
+  position: relative;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-top: calc(var(--ten-px) * 2);
+  margin-top: ${({ $marginTop }) => $marginTop || "70px"};
   overflow: scroll;
 `;
 

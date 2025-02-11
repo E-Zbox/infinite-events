@@ -29,7 +29,7 @@ import {
 } from "@/app/styles/shared/Container.styles";
 import { IEvent } from "@/api/graphql/interface";
 import { getEventById, registerForEvent } from "@/api/graphql";
-import { FormLink } from "@/app/styles/AuthenticationScreen.styles";
+import { FormLink } from "@/app/styles/AuthenticationScreen/index.styles";
 import {
   CategoryContainer,
   CategoryScroller,
@@ -51,6 +51,7 @@ const AboutEvent = () => {
   const router = useRouter();
 
   const [eventState, setEventState] = useState<IEvent>();
+  const [justRSVPedState, setJustRSVPedState] = useState(false);
   const [loadingState, setLoadingState] = useState(false);
   const [totalAttendeesState, setTotalAttendeesState] = useState(0);
 
@@ -68,7 +69,7 @@ const AboutEvent = () => {
       return;
     }
 
-    setEventState(eventState);
+    setJustRSVPedState(true);
   };
 
   const handleEventCategoryClick = (_id: string) => {
@@ -81,6 +82,8 @@ const AboutEvent = () => {
     if (!token) {
       router.push("/");
     }
+
+    console.log({ _id, justRSVPedState, token });
 
     setLoadingState(true);
 
@@ -102,7 +105,7 @@ const AboutEvent = () => {
 
         setLoadingState(false);
       });
-  }, [_id, token]);
+  }, [_id, justRSVPedState, token]);
 
   useEffect(() => {
     if (eventState) {

@@ -17,7 +17,7 @@ import { StatusImage } from "@/app/styles/shared/Image.styles";
 // utils
 import { screens } from "@/app/utils/data";
 import { getMyEvents } from "@/api/graphql";
-import { FormLink } from "@/app/styles/AuthenticationScreen.styles";
+import { FormLink } from "@/app/styles/AuthenticationScreen/index.styles";
 
 const Me = () => {
   const {

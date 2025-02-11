@@ -6,7 +6,10 @@ import { createEvent } from "@/api/rest/event";
 // store
 import { useDefaultStore, useEventPageStore } from "@/store";
 // styles
-import { FormLink, TextInput } from "@/app/styles/AuthenticationScreen.styles";
+import {
+  FormLink,
+  TextInput,
+} from "@/app/styles/AuthenticationScreen/index.styles";
 import {
   CreateEventTitle,
   EventCategory,
@@ -62,7 +65,7 @@ const CreateEvent = () => {
   const [fileState, setFileState] = useState<File>();
   const [loadingState, setLoadingState] = useState(false);
 
-  const { token, username } = userState;
+  const { isGuest, token, username } = userState;
 
   const categoriesIds = Object.getOwnPropertyNames(categoryState);
 
@@ -180,7 +183,8 @@ const CreateEvent = () => {
   };
 
   useEffect(() => {
-    if (!token) {
+    if (!token || isGuest) {
+      window.alert("You need to be signed-in to create an event!");
       router.push("/");
     }
   }, [token]);

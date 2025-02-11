@@ -51,6 +51,7 @@ const HomeScreen = () => {
     eventState,
     setEventState,
     setSelectedCategoryIdState,
+    navbarHeightState,
     userState,
   } = useDefaultStore();
 
@@ -73,7 +74,7 @@ const HomeScreen = () => {
 
   const [loadingState, setLoadingState] = useState(false);
 
-  const { socket, token, username } = userState;
+  const { isGuest, socket, token } = userState;
 
   const categoriesIds = Object.getOwnPropertyNames(categoryState);
 
@@ -90,6 +91,22 @@ const HomeScreen = () => {
         return { ...filter, selected: false };
       })
     );
+  };
+
+  const handleEventCardClick = (_id: string) => {
+    if (isGuest) {
+      window.alert("Only signed-in Users can view more details of an event!");
+      return;
+    }
+    router.push(`/event/about/${_id}`);
+  };
+
+  const handleAddEventButtonClick = () => {
+    if (isGuest) {
+      window.alert("Only signed-in Users can create an event!");
+      return;
+    }
+    router.push("/event/create");
   };
 
   const {
@@ -119,7 +136,7 @@ const HomeScreen = () => {
 
     setLoadingState(true);
 
-    getCategories(token)
+    getCategories(token, isGuest)
       .then((res) => {
         const { data, error, success } = res;
 
@@ -157,7 +174,7 @@ const HomeScreen = () => {
 
       setLoadingState(true);
 
-      getEventsByCategoryId(token, selectedCategoryIdState)
+      getEventsByCategoryId(token, selectedCategoryIdState, isGuest)
         .then((res) => {
           const { data, error, success } = res;
 
@@ -187,7 +204,12 @@ const HomeScreen = () => {
 
       setLoadingState(true);
 
-      getEventsByCategoryIdAndTimeline(token, selectedCategoryIdState, value)
+      getEventsByCategoryIdAndTimeline(
+        token,
+        selectedCategoryIdState,
+        value,
+        isGuest
+      )
         .then((res) => {
           const { data, error, success } = res;
 
@@ -210,7 +232,6 @@ const HomeScreen = () => {
   return (
     <MainHomeScreen>
       <HomeScreenContainer>
-        <h2>Welcome, {username}</h2>
         <SectionTitle>CATEGORIES</SectionTitle>
         <MainCategory>
           <CategoryScroller>
@@ -250,7 +271,7 @@ const HomeScreen = () => {
         <MainEvents>
           <EventsContainer>
             {categoriesIds.length > 0 ? (
-              <AddEventButton onClick={() => router.push("/event/create")}>
+              <AddEventButton onClick={() => handleAddEventButtonClick}>
                 <p>Create Event</p>
               </AddEventButton>
             ) : (
@@ -264,7 +285,7 @@ const HomeScreen = () => {
                   <EventCard
                     key={_id}
                     $bgImg={path || ""}
-                    onClick={() => router.push(`/event/about/${_id}`)}
+                    onClick={() => handleEventCardClick(_id)}
                   >
                     <EventName>{name}</EventName>
                   </EventCard>

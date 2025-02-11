@@ -9,9 +9,9 @@ import { useDefaultStore } from "@/store";
 export default function Home() {
   const { userState } = useDefaultStore();
 
-  const { signedIn } = userState;
+  const { isGuest, signedIn } = userState;
 
-  if (signedIn) {
+  if (signedIn || isGuest) {
     return <HomeScreen />;
   }
   return <AuthenticationScreen />;

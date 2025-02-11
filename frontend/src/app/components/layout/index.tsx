@@ -44,20 +44,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             href="https://fonts.googleapis.com/css?family=Inika"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap"
+            rel="stylesheet"
+          />
         </head>
-        <body className={inter.className}>
-          {/* {
-                        loading ? 
-                        (
-                            <Loader />
-                        ) 
-                        : 
-                        <>
-                            {children}
-                        </>
-                    } */}
-          {children}
-        </body>
+        <body className={inter.className}>{children}</body>
       </html>
       <GlobalStyles />
     </ThemeProvider>
