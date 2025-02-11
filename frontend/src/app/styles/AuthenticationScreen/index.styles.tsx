@@ -23,10 +23,6 @@ export const MainAuthScreen = styled.main`
   }
 `;
 
-export const MainImageScroller = styled.main`
-  border: 1px solid red;
-`;
-
 export const MainForm = styled.main`
   align-items: center;
   padding: calc(var(--ten-px) * 3);
@@ -184,4 +180,65 @@ export const SubmitButton = styled.button`
       transform: translateY(0px);
     }
   }
+`;
+
+export const OrContainer = styled.div`
+  --textColor: ${({ theme: { white01 } }) => white01}8a;
+  --bgColor: ${({ theme: { white01 } }) => white01}6a;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: calc(var(--ten-px) * 2) 0px;
+
+  & > h4 {
+    color: var(--textColor);
+  }
+
+  & > div {
+    background-color: var(--bgColor);
+  }
+`;
+
+export const OrText = styled.h4`
+  font-size: 1rem;
+  width: fit-content;
+  margin: 0px var(--seven-px);
+`;
+
+export const OrLine = styled.div`
+  flex-basis: 0;
+  flex-grow: 1;
+  height: 1px;
+  border-radius: 30px;
+  transform: translateY(0%);
+`;
+
+export const GuestLogin = styled.div`
+  ${({ theme: { blue01, black01 } }) => `
+    width: 100%;
+    display: grid;
+    place-content: center;
+    color: ${blue01};
+    font-family: Source Sans Pro;
+    font-size: 1.15rem;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid ${blue01};
+    padding: calc(var(--ten-px) * 2) 0px;
+    transition: 350ms ease-out;
+
+    &:hover {
+      color: #fffc;
+      background-color: ${blue01};
+      border: 1px solid transparent;
+    }
+
+    &:active {
+      scale: 0.98;
+      transform: translateY(3px);
+    }
+  `}
 `;
