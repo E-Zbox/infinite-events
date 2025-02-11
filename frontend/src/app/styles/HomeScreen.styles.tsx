@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface IMainHomeScreen {
-  $marginTop?: string;
+  $marginTop: string;
 }
 
 interface ISelected {
@@ -20,8 +20,8 @@ export const MainHomeScreen = styled.main<IMainHomeScreen>`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-top: ${({ $marginTop }) => $marginTop || "70px"};
   overflow: scroll;
+  margin-top: ${({ $marginTop }) => $marginTop};
 `;
 
 export const HomeScreenContainer = styled.div`
@@ -244,11 +244,16 @@ export const AddEventButton = styled.div`
         border-radius: 5px;
         cursor: pointer;
         border: 1px dashed ${blue01};
+        transition: 250ms ease-in;
 
         &:hover {
             color: ${black04};
             background-color: ${blue01}ac;
             border: 0px dashed transparent;
+        }
+
+        &:active {
+          scale: 0.9;
         }
     `}
 `;

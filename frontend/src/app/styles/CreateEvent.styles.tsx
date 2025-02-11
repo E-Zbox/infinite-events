@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface IMainCreateEvent {
+  $marginTop: string;
+}
+
 interface IInputContainer {
   $border?: boolean;
 }
@@ -8,13 +12,14 @@ interface ISelected {
   $selected: boolean;
 }
 
-export const MainCreateEvent = styled.main`
+export const MainCreateEvent = styled.main<IMainCreateEvent>`
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  margin-top: ${({ $marginTop }) => $marginTop};
   overflow: scroll;
 `;
 

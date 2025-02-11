@@ -1,16 +1,21 @@
 import styled from "styled-components";
 
+interface IMainAboutEvent {
+  $marginTop: string;
+}
+
 interface IBanner {
   $bgImg: string;
 }
 
-export const MainAboutEvent = styled.main`
+export const MainAboutEvent = styled.main<IMainAboutEvent>`
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   overflow: scroll;
+  margin-top: ${({ $marginTop }) => $marginTop};
 `;
 
 export const Banner = styled.div<IBanner>`

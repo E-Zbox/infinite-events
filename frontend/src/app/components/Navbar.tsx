@@ -18,7 +18,8 @@ const Navbar = () => {
     },
   } = screens;
 
-  const { setNavbarHeightState, userState, setUserState } = useDefaultStore();
+  const { navbarHeightState, setNavbarHeightState, userState, setUserState } =
+    useDefaultStore();
 
   const navbarRef = useRef<HTMLElement>(null);
 

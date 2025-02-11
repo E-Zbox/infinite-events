@@ -63,7 +63,7 @@ export const FormLink = styled.h4`
 `;
 
 export const Form = styled.form`
-  height: 400px;
+  height: fit-content;
   width: 100%;
   max-width: 450px;
   display: flex;

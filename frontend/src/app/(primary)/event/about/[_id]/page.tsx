@@ -39,7 +39,8 @@ const AboutEvent = () => {
   const { event_room_error, event_room_success, join_event_rooms_success } =
     emitEvents;
   const { join_event_rooms } = onEvents;
-  const { setSelectedCategoryIdState, userState } = useDefaultStore();
+  const { navbarHeightState, setSelectedCategoryIdState, userState } =
+    useDefaultStore();
   const {
     default: {
       assets: { loaderLogo },
@@ -82,8 +83,6 @@ const AboutEvent = () => {
     if (!token) {
       router.push("/");
     }
-
-    console.log({ _id, justRSVPedState, token });
 
     setLoadingState(true);
 
@@ -159,7 +158,7 @@ const AboutEvent = () => {
   }, [userState]);
 
   return (
-    <MainAboutEvent>
+    <MainAboutEvent $marginTop={navbarHeightState}>
       {loadingState && !eventState ? (
         <StatusImage src={loaderLogo.src} alt="loader" $size="50px" />
       ) : eventState ? (

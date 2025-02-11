@@ -49,7 +49,7 @@ const CreateEvent = () => {
       assets: { loaderLogo },
     },
   } = screens;
-  const { userState } = useDefaultStore();
+  const { navbarHeightState, userState } = useDefaultStore();
   const { categoryState, toggleCategorySelectedState } = useEventPageStore();
 
   const [formState, setFormState] = useState<IForm>({
@@ -190,7 +190,7 @@ const CreateEvent = () => {
   }, [token]);
 
   return (
-    <MainCreateEvent>
+    <MainCreateEvent $marginTop={navbarHeightState}>
       <MainContainer $alignItems="flex-start">
         <FormLink onClick={() => router.push("/")}>Go to Dashboard</FormLink>
         <CreateEventTitle>Host your event today, {username}</CreateEventTitle>

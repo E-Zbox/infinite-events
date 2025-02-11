@@ -25,7 +25,7 @@ const Me = () => {
       assets: { loaderLogo },
     },
   } = screens;
-  const { userState } = useDefaultStore();
+  const { navbarHeightState, userState } = useDefaultStore();
 
   const { eventState, setEventState } = useEventPageStore();
 
@@ -65,7 +65,7 @@ const Me = () => {
   }, [token]);
 
   return (
-    <MainHomeScreen>
+    <MainHomeScreen $marginTop={navbarHeightState}>
       <HomeScreenContainer>
         <FormLink onClick={() => router.push("/")}>Go to Dashboard</FormLink>
         <h2>Manage all your events, {username}</h2>

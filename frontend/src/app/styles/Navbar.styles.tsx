@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MainNav = styled.main`
-  position: sticky;
+  position: absolute;
   top: 0px;
   left: 0px;
   height: 70px;
@@ -10,8 +10,7 @@ export const MainNav = styled.main`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background
-  box-shadow: 0px 0px 1px 2px #ddd1;
+  box-shadow: 0px 1px 1px 1px #aaa1;
   background-color: ${({ theme: { black05 } }) => black05};
   padding: 0px calc(var(--ten-px) * 4) 0px calc(var(--ten-px) * 3);
 `;

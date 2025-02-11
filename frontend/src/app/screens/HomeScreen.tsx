@@ -230,7 +230,7 @@ const HomeScreen = () => {
   }, [timelineFilterState]);
 
   return (
-    <MainHomeScreen>
+    <MainHomeScreen $marginTop={navbarHeightState}>
       <HomeScreenContainer>
         <SectionTitle>CATEGORIES</SectionTitle>
         <MainCategory>
