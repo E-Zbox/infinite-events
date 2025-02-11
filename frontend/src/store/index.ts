@@ -17,6 +17,7 @@ export interface IEventState {
 }
 
 interface IUserState {
+  isGuest: boolean;
   signedIn: boolean;
   socket: Socket;
   token: string;
@@ -31,6 +32,8 @@ interface IStore {
   setSelectedCategoryIdState: (newState: string) => void;
   eventState: IEventState;
   setEventState: (newState: IEventState) => void;
+  navbarHeightState: string;
+  setNavbarHeightState: (newState: string) => void;
   userState: IUserState;
   setUserState: (newState: IUserState) => void;
 }
@@ -66,7 +69,11 @@ export const useDefaultStore = create<IStore>((set) => ({
       ...prevState,
       eventState: { ...prevState.eventState, ...newState },
     })),
+  navbarHeightState: "0px",
+  setNavbarHeightState: (newState: string) =>
+    set({ navbarHeightState: newState }),
   userState: {
+    isGuest: false,
     signedIn: false,
     socket: io(`${SOCKET_URL}/socket/user`, {
       query: {

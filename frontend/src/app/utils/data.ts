@@ -1,7 +1,7 @@
-import checkmarkLogo from "../../../public/icons8-check-48.png";
-import hidePasswordLogo from "../../../public/icons8-hide-password-50.png";
 import loaderLogo from "../../../public/loader.gif";
-import showPasswordLogo from "../../../public/icons8-show-password-30.png";
+// screens
+import authentication from "./authentication";
+import navbar from "./navbar";
 
 export const theme = {
   black01: "#4c4c5c",
@@ -25,11 +25,6 @@ export const screens = {
       loaderLogo,
     },
   },
-  authentication: {
-    assets: {
-      checkmarkLogo,
-      hidePasswordLogo,
-      showPasswordLogo,
-    },
-  },
+  authentication,
+  navbar,
 };
